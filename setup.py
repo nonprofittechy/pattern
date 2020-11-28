@@ -9,7 +9,7 @@ from io import open
 
 from setuptools import setup
 
-from pattern import __version__
+from docassemble_pattern import __version__
 
 #---------------------------------------------------------------------------------------------------
 # "python setup.py zip" will create the zipped distribution and checksum.
@@ -20,7 +20,7 @@ if sys.argv[-1] == "zip":
     import hashlib
     import re
 
-    n = "pattern-%s.zip" % __version__
+    n = "docassemble_pattern-%s.zip" % __version__
     p = os.path.join(os.path.dirname(os.path.realpath(__file__)))
     z = zipfile.ZipFile(os.path.join(p, "..", n), "w", zipfile.ZIP_DEFLATED)
     for root, folders, files in os.walk(p):
@@ -36,7 +36,7 @@ if sys.argv[-1] == "zip":
             # Exclude revision history (.git).
             # Exclude development files (.dev).
             if not re.search(r"\.DS|\.git[^i]|\.pyc|\.dev|tmp", f):
-                z.write(f, os.path.join("pattern-" + __version__, os.path.relpath(f, p)))
+                z.write(f, os.path.join("docassemble_pattern-" + __version__, os.path.relpath(f, p)))
             if f.endswith(os.path.join("web", "api.py")):
                 x = open(f, "w", encoding="utf-8")
                 x.write(d.join(s))
@@ -47,68 +47,49 @@ if sys.argv[-1] == "zip":
     sys.exit(0)
 
 #---------------------------------------------------------------------------------------------------
-# "python setup.py install" will install /pattern in /site-packages.
+# "python setup.py install" will install /docassemble_pattern in /site-packages.
 
 setup(
-            name = "Pattern",
+            name = "Docassemble-Pattern",
          version = "3.6",
-     description = "Web mining module for Python.",
+     description = "Fork of pattern for use with docassemble",
          license = "BSD",
-          author = "Tom De Smedt",
-    author_email = "tom@organisms.be",
-             url = "http://www.clips.ua.ac.be/pages/pattern",
+          author = "Tom De Smedt, Jonathan Pyle",
+    author_email = "jhpyle@gmail.com",
+             url = "https://docassemble.org",
         packages = [
-        "pattern",
-        "pattern.web",
-        "pattern.web.cache",
-        "pattern.web.imap",
-        "pattern.web.locale",
-        "pattern.web.oauth",
-        "pattern.db",
-        "pattern.text",
-        "pattern.text.de",
-        "pattern.text.en",
-        "pattern.text.en.wordlist",
-        "pattern.text.en.wordnet",
-        "pattern.text.ru",
-        "pattern.text.ru.wordlist",
-        "pattern.text.es",
-        "pattern.text.fr",
-        "pattern.text.it",
-        "pattern.text.nl",
-        "pattern.vector",
-        "pattern.vector.svm",
-        "pattern.graph",
-        "pattern.server"
+        "docassemble_pattern",
+        "docassemble_pattern.text",
+        "docassemble_pattern.text.de",
+        "docassemble_pattern.text.en",
+        "docassemble_pattern.text.en.wordlist",
+        "docassemble_pattern.text.en.wordnet",
+        "docassemble_pattern.text.ru",
+        "docassemble_pattern.text.ru.wordlist",
+        "docassemble_pattern.text.es",
+        "docassemble_pattern.text.fr",
+        "docassemble_pattern.text.it",
+        "docassemble_pattern.text.nl",
+        "docassemble_pattern.vector",
+        "docassemble_pattern.vector.svm"
     ],
     package_data = {
-        "pattern"                 : ["*.js"],
-        "pattern.web.cache"       : ["tmp/*"],
-        "pattern.web.locale"      : ["*"],
-        "pattern.text.de"         : ["*.txt", "*.xml"],
-        "pattern.text.en"         : ["*.txt", "*.xml", "*.slp"],
-        "pattern.text.en.wordlist": ["*.txt"],
-        "pattern.text.en.wordnet" : ["*.txt", "dict/*"],
-        "pattern.text.ru": ["*.txt", "*.xml", "*.slp"],
-        "pattern.text.ru.wordlist": ["*.txt"],
-        "pattern.text.es"         : ["*.txt", "*.xml"],
-        "pattern.text.fr"         : ["*.txt", "*.xml"],
-        "pattern.text.it"         : ["*.txt", "*.xml"],
-        "pattern.text.nl"         : ["*.txt", "*.xml"],
-        "pattern.vector"          : ["*.txt"],
-        "pattern.vector.svm"      : ["*.txt"],
-        "pattern.graph"           : ["*.js", "*.csv"],
-        "pattern.server"          : ["static/*"],
+        "docassemble_pattern.text.de"         : ["*.txt", "*.xml"],
+        "docassemble_pattern.text.en"         : ["*.txt", "*.xml", "*.slp"],
+        "docassemble_pattern.text.en.wordlist": ["*.txt"],
+        "docassemble_pattern.text.en.wordnet" : ["*.txt", "dict/*"],
+        "docassemble_pattern.text.ru": ["*.txt", "*.xml", "*.slp"],
+        "docassemble_pattern.text.ru.wordlist": ["*.txt"],
+        "docassemble_pattern.text.es"         : ["*.txt", "*.xml"],
+        "docassemble_pattern.text.fr"         : ["*.txt", "*.xml"],
+        "docassemble_pattern.text.it"         : ["*.txt", "*.xml"],
+        "docassemble_pattern.text.nl"         : ["*.txt", "*.xml"],
+        "docassemble_pattern.vector"          : ["*.txt"],
+        "docassemble_pattern.vector.svm"      : ["*.txt"]
     },
-    py_modules = [
-        "pattern.metrics",
-        "pattern.helpers",
-        "pattern.text.search",
-        "pattern.text.tree"
-    ],
+    py_modules = [],
     classifiers = [
         "Development Status :: 5 - Production/Stable",
-        "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
@@ -125,29 +106,16 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
-        "Topic :: Multimedia :: Graphics",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
-        "Topic :: Scientific/Engineering :: Visualization",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Text Processing :: Linguistic",
-        "Topic :: Text Processing :: Markup :: HTML"
+        "Topic :: Text Processing :: Linguistic"
     ],
     install_requires = [
         "future",
-        "backports.csv",
-        "mysqlclient",
-        "beautifulsoup4",
-        "lxml",
-        "feedparser",
-        "pdfminer" if sys.version < "3" else "pdfminer.six",
         "numpy",
         "scipy",
-        "nltk",
-        "python-docx",
-        "cherrypy",
-        "requests"
+        "nltk"
     ],
     zip_safe = False
 )

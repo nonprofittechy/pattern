@@ -1,6 +1,10 @@
 Pattern
 =======
 
+**This version was modified by Jonathan Pyle for compatibility with
+docassemble running on Python 3.8.  Many of the features of the
+package have been removed.**
+
 [![Build Status](http://img.shields.io/travis/clips/pattern/master.svg?style=flat)](https://travis-ci.org/clips/pattern/branches)
 [![Coverage](https://img.shields.io/coveralls/clips/pattern/master.svg?style=flat)](https://coveralls.io/github/clips/pattern?branch=master)
 [![PyPi version](http://img.shields.io/pypi/v/pattern.svg?style=flat)](https://pypi.python.org/pypi/pattern)
@@ -23,9 +27,9 @@ Example
 This example trains a classifier on adjectives mined from Twitter using Python 3. First, tweets that contain hashtag #win or #fail are collected. For example: *"$20 tip off a sweet little old lady today #win"*. The word part-of-speech tags are then parsed, keeping only adjectives. Each tweet is transformed to a vector, a dictionary of adjective → count items, labeled `WIN` or `FAIL`. The classifier uses the vectors to learn which other tweets look more like `WIN` or more like `FAIL`.
 
 ```python
-from pattern.web import Twitter
-from pattern.en import tag
-from pattern.vector import KNN, count
+from docassemble_pattern.web import Twitter
+from docassemble_pattern.en import tag
+from docassemble_pattern.vector import KNN, count
 
 twitter, knn = Twitter(), KNN()
 
@@ -68,7 +72,7 @@ If none of the above works, you can make Python aware of the module in three way
 ```python
 MODULE = '/users/tom/desktop/pattern'
 import sys; if MODULE not in sys.path: sys.path.append(MODULE)
-from pattern.en import parsetree
+from docassemble_pattern.en import parsetree
 ```
 
 Documentation
