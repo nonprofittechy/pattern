@@ -3596,7 +3596,10 @@ class SVM(Classifier):
         if self._type == CLASSIFICATION and probability and self.extension == LIBLINEAR:
             return Probabilities(self, defaultdict(float, ((H3[i + 1], w) for i, w in enumerate(p[2][0]))))
         if self._type == CLASSIFICATION and probability:
-            return Probabilities(self, defaultdict(float, ((H3[i + 0], w) for i, w in enumerate(p[2][0]))))
+            try:
+                return Probabilities(self, defaultdict(float, ((H3[i + 0], w) for i, w in enumerate(p[2][0]))))
+            except KeyError as e:
+                return Probabilities(self, defaultdict(float, ((H3[i + 1], w) for i, w in enumerate(p[2][0]))))
         if self._type == CLASSIFICATION:
             return H3.get(int(p[0][0]))
         if self._type == REGRESSION:

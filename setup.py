@@ -51,7 +51,7 @@ from setuptools import setup
 
 setup(
             name = "Docassemble-Pattern",
-         version = "3.6.1",
+         version = "3.6.2",
      description = "Fork of pattern for use with docassemble",
          license = "BSD",
           author = "Tom De Smedt, Jonathan Pyle",
