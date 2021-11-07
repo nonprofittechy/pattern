@@ -51,7 +51,7 @@ from setuptools import setup
 
 setup(
             name = "Docassemble-Pattern",
-         version = "3.6.2",
+         version = "3.6.3",
      description = "Fork of pattern for use with docassemble",
          license = "BSD",
           author = "Tom De Smedt, Jonathan Pyle",
@@ -113,7 +113,7 @@ setup(
         "future==0.18.2",
         "numpy==1.19.4",
         "scipy==1.5.4",
-        "nltk==3.5"
+        "nltk==3.6.5"
     ],
     zip_safe = False
 )
