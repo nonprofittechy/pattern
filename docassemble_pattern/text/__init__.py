@@ -2213,13 +2213,19 @@ class Verbs(lazydict):
             v = self[b]
             for i in (i1, i2, i3):
                 if i is not None and 0 <= i < len(v) and v[i]:
-                    return v[i]
+                    if verb[0].isupper():
+                        return v[i].capitalize()
+                    else:
+                        return v[i]
         if kwargs.get("parse", True) is True: # rule-based
             v = self.find_lexeme(b)
             for i in (i1, i2, i3):
                 if i is not None and 0 <= i < len(v) and v[i]:
-                    return v[i]
-
+                    if verb[0].isupper():
+                        return v[i].capitalize()
+                    else:
+                        return v[i]
+                        
     def tenses(self, verb, parse=True):
         """ Returns a list of possible tenses for the given inflected verb.
         """
